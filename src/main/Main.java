@@ -1,49 +1,44 @@
-import models.Product;
+package main;
+
+import models.*;
 
 import java.util.Date;
-
 public class Main {
     public static void main(String[] args) {
+        // Create stores
+        Store store1 = new Store(1, "Carrefour", "City Center");
+        Store store2 = new Store(2, "Monoprix", "Menzah 6");
 
-        // 1) Create an empty product
-        Product emptyProduct = new Product();
-        emptyProduct.display();
+        // Create employees for store1
+        store1.addEmployee(new Cashier(101, "Alice", "Downtown", 190, 1));
+        store1.addEmployee(new Cashier(102, "Bob", "Uptown", 160, 2));
+        store1.addEmployee(new Salesperson(103, "Charlie", "Suburb", 150, 0.5));
+        store1.addEmployee(new Manager(104, "Diana", "City Center", 170, 200));
 
-        // 2) Create new products with specified characteristics
-        Product milk = new Product(1021, "Milk", "Delight", 0.0);
-        Product yogurt = new Product(2510, "Yogurt", "Vitalait", 0.0);
-        Product tomato = new Product(3250, "Tomato", "Sicam", 1.200);
+        // Create employees for store2
+        store2.addEmployee(new Cashier(201, "Eve", "Westside", 185, 3));
+        store2.addEmployee(new Salesperson(202, "Frank", "Eastside", 140, 0.7));
+        store2.addEmployee(new Salesperson(203, "Grace", "Midtown", 160, 0.6));
+        store2.addEmployee(new Salesperson(204, "Hank", "Northside", 130, 0.8));
+        store2.addEmployee(new Manager(205, "Ivy", "Southside", 175, 300));
 
-        // Display initial product details
-        milk.display();
-        yogurt.display();
-        tomato.display();
+        // Add products to stores
+        store1.addProduct(new Product(1011, "Milk", "Delight", 0.700));
+        store1.addProduct(new Product(1012, "Yogurt", "Vitalait", 1.200));
+        store2.addProduct(new Product(2011, "Bread", "Bakery", 0.500));
+        store2.addProduct(new Product(2012, "Tomato", "Sicam", 0.900));
 
-        // 4) Assign a price to the milk product and display it
-        milk.setPrice(0.700);
-        milk.display();
+        // Display details of each store
+        System.out.println("Details of Store 1:");
+        store1.displayDetails();
 
-        // 5) Complete the missing information for each product
-        yogurt.setPrice(0.500);
-        tomato.setPrice(1.200);
+        System.out.println("\nDetails of Store 2:");
+        store2.displayDetails();
 
-        // 6) Display modified products
-        yogurt.display();
-        tomato.display();
-
-        // 7) Display products using the toString() method
-        System.out.println(milk);
-        System.out.println(yogurt);
-        System.out.println(tomato);
-
-        // 8) Add an expiration date attribute and assign dates to existing products
-        milk.setExpirationDate(new Date(2024, 11, 20));  // Example date
-        yogurt.setExpirationDate(new Date(2024, 11, 25));  // Example date
-        tomato.setExpirationDate(new Date(2025, 1, 15));  // Example date
-
-        // Display products with expiration dates
-        milk.display();
-        yogurt.display();
-        tomato.display();
+        // Calculate and display salaries
+        System.out.println("\nSalaries:");
+        store1.getEmployees().forEach(e -> System.out.println(e + ", Salary: " + e.calculateSalary() + " DT"));
+        store2.getEmployees().forEach(e -> System.out.println(e + ", Salary: " + e.calculateSalary() + " DT"));
     }
 }
+
